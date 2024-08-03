@@ -12,10 +12,11 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 - Color selection for code creation and guessing
 - Real-time feedback on guesses
 - Game over detection with secret code reveal
+- Dynamic UI that changes based on game state
 
 ## Mastermind Project Version History
 
-### Version 1.0 - 2.1
+### Version 1.0 - 2.3
 
 - **1.0**: Initial release with basic Mastermind gameplay
 - **1.1**: Added feedback mechanism for correct and misplaced pegs
@@ -26,6 +27,8 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 - **1.6**: Improved responsive design, updated button styling, and refined overall layout
 - **2.0**: Updated play area background, improved UI elements, and enhanced responsive design
 - **2.1**: Added custom font, updated color scheme, enhanced button styling, and further refined layout
+- **2.2**: Implemented dynamic UI changes based on game state
+- **2.3**: Refined game over state display and improved overall user experience
 
 ## Logic and Function Explanations
 

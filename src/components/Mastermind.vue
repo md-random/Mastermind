@@ -1,35 +1,31 @@
 <template>
   <div class="mastermind-container">
     <div class="controls">
-      <div class="title-align">
-        <h1>Mastermind <span class="version-align">version 2.1</span></h1>
+      <div v-if="!gameOver">
+        <div class="title-align">
+          <h1>Mastermind <span class="version-align">version 2.3</span></h1>
+        </div>
+        <div class="color-buttons">
+          <button
+            v-for="color in colors"
+            :key="color"
+            :style="{ backgroundColor: color }"
+            @click="addColor(color)"
+            class="color-peg"
+          ></button>
+        </div>
+        <div class="current-guess">
+          Current guess:
+          <span
+            v-for="(color, index) in currentGuess"
+            :key="index"
+            :style="{ backgroundColor: color }"
+            class="color-peg"
+          ></span>
+        </div>
       </div>
-
-      <div class="color-buttons">
-        <button
-          v-for="color in colors"
-          :key="color"
-          :style="{ backgroundColor: color }"
-          @click="addColor(color)"
-          class="color-peg"
-        ></button>
-      </div>
-      <div class="current-guess">
-        Current guess:
-        <span
-          v-for="(color, index) in currentGuess"
-          :key="index"
-          :style="{ backgroundColor: color }"
-          class="color-peg"
-        ></span>
-      </div>
-      <div class="action-buttons">
-        <button @click="removeLastColor">Remove Last</button>
-        <button @click="submitGuess">Submit Guess</button>
-        <button @click="startNewGame">New Game</button>
-      </div>
-      <div v-if="gameOver" class="secret-code">
-        <h2>Game Over!</h2>
+      <div v-else class="secret-code">
+        <h1>Game Over!</h1>
         <p>The secret code was:</p>
         <div class="secret-pegs">
           <span
@@ -39,6 +35,13 @@
             class="color-peg secret-peg"
           ></span>
         </div>
+      </div>
+      <div class="action-buttons">
+        <button @click="removeLastColor" :disabled="gameOver">
+          Remove Last
+        </button>
+        <button @click="submitGuess" :disabled="gameOver">Submit Guess</button>
+        <button @click="startNewGame">New Game</button>
       </div>
     </div>
     <div class="play-area">
