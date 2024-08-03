@@ -1,10 +1,11 @@
 <template>
   <div class="mastermind-container">
     <div class="controls">
-      <div class="version-align">version 1.5</div>
-      <h1>Mastermind</h1>
-      <button @click="startNewGame">New Game</button>
-      <p>Guesses: {{ guessCount }} / 8</p>
+      <div class="title-align">
+        <h1>Mastermind <span class="version-align">version 1.6</span></h1>
+        <p>Guesses: {{ guessCount }} / 8</p>
+      </div>
+
       <div class="color-buttons">
         <button
           v-for="color in colors"
@@ -23,8 +24,11 @@
           class="color-peg"
         ></span>
       </div>
-      <button @click="removeLastColor">Remove Last</button>
-      <button @click="submitGuess">Submit Guess</button>
+      <div class="action-buttons">
+        <button @click="removeLastColor">Remove Last</button>
+        <button @click="submitGuess">Submit Guess</button>
+        <button @click="startNewGame">New Game</button>
+      </div>
       <div v-if="gameOver" class="secret-code">
         <h2>Game Over!</h2>
         <p>The secret code was:</p>
@@ -179,6 +183,19 @@ startNewGame()
   transform: translateY(-25%);
 }
 
+.version-align {
+  display: flex;
+  align-items: center;
+  font-size: x-small;
+  color: #fff;
+  padding-left: 20px;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
 .play-area {
   width: 25%;
   position: absolute;
@@ -192,15 +209,6 @@ startNewGame()
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.version-align {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 14px;
-  color: #4169e1;
-  font-weight: bold;
 }
 
 .board-rows {
@@ -348,5 +356,103 @@ button {
   margin-right: 10px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.action-buttons button {
+  border-radius: 15px; /* Rounded rectangles */
+  padding: 8px 16px; /* Ensure padding between buttons */
+}
+
+@media (max-width: 768px) {
+  .mastermind-container {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .controls {
+    width: 100%;
+    position: static;
+    transform: none;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: inherit;
+  }
+
+  .play-area {
+    width: 300px;
+    position: static;
+    transform: none;
+    order: 1;
+    margin: 0 auto;
+  }
+
+  .title-align p {
+    margin: 0 0 20 0 !important;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 !important;
+  }
+
+  .board-rows {
+    transform: none;
+    border-width: 10px;
+    padding: 10px;
+  }
+
+  .board-row {
+    padding: 5px;
+  }
+
+  .peg-hole,
+  .color-peg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .feedback-peg-hole {
+    width: 10px;
+    height: 10px;
+  }
+
+  .feedback-peg {
+    width: 8px;
+    height: 8px;
+  }
+
+  .color-buttons button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  .current-guess .color-peg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .secret-peg {
+    width: 20px;
+    height: 20px;
+  }
+
+  button {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+  }
 }
 </style>

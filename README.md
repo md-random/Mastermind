@@ -15,7 +15,7 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 
 ## Mastermind Project Version History
 
-### Version 1.0 - 1.5
+### Version 1.0 - 1.6
 
 - **1.0**: Initial release with basic Mastermind gameplay
 - **1.1**: Added feedback mechanism for correct and misplaced pegs
@@ -23,6 +23,7 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 - **1.3**: Enhanced game board layout and visual feedback
 - **1.4**: Refined game board layout, improved user interface, and fixed bugs
 - **1.5**: Introduced a 3D wood-like appearance for the play area and adjusted layout for controls and play area positioning
+- **1.6**: Improved responsive design, updated button styling, and refined overall layout
 
 ## Logic and Function Explanations
 
