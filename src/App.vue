@@ -22,7 +22,7 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
 
-  background-color: rgba(58, 114, 114, 0.491);
+  background-color: #82ddf0;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -2,7 +2,7 @@
   <div class="mastermind-container">
     <div class="controls">
       <div class="title-align">
-        <h1>Mastermind <span class="version-align">version 2.0</span></h1>
+        <h1>Mastermind <span class="version-align">version 2.1</span></h1>
       </div>
 
       <div class="color-buttons">
@@ -164,6 +164,7 @@ startNewGame()
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 .mastermind-container {
   display: flex;
   justify-content: flex-start;
@@ -172,6 +173,7 @@ startNewGame()
   padding: 20px;
   width: 100%;
   position: relative;
+  font-family: 'Playfair Display', serif;
 }
 
 .controls {
@@ -185,14 +187,15 @@ startNewGame()
 .version-align {
   display: flex;
   align-items: center;
-  font-size: x-small;
-  color: #fff;
+  font-size: small;
+  color: #a57548;
   padding-left: 20px;
 }
 
 h1 {
   display: flex;
   justify-content: center;
+  font-size: 3em;
 }
 
 .play-area {
@@ -219,7 +222,7 @@ h1 {
     inset 0 0 50px rgba(0, 0, 0, 0.5);
   padding: 20px;
   transform: perspective(1000px) rotateX(5deg);
-  background-color: rgb(88, 143, 143);
+  background-color: #5296a5;
 }
 
 .board-row {
@@ -302,7 +305,7 @@ h1 {
 .color-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
   justify-content: center;
 }
 
@@ -327,7 +330,7 @@ h1 {
   height: 26px;
   border-radius: 50%;
   border: 2px solid #000;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 .secret-code {
@@ -353,6 +356,11 @@ button {
   margin-right: 10px;
   padding: 5px 10px;
   cursor: pointer;
+  background-color: #5296a5;
+  color: #fcd7ad;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    inset 0 0 50px rgba(0, 0, 0, 0.5);
+  border: none !important;
 }
 
 .action-buttons {
@@ -364,8 +372,8 @@ button {
 }
 
 .action-buttons button {
-  border-radius: 15px; /* Rounded rectangles */
-  padding: 8px 16px; /* Ensure padding between buttons */
+  border-radius: 15px;
+  padding: 8px 16px;
 }
 
 @media (max-width: 768px) {
@@ -399,6 +407,7 @@ button {
   h1 {
     font-size: 1.5rem;
     margin: 0 !important;
+    padding-bottom: 20px;
   }
 
   .board-rows {
@@ -443,9 +452,14 @@ button {
     height: 20px;
   }
 
+  .current-guess {
+    margin: 10px 20px;
+    min-height: 35px;
+  }
+
   button {
     padding: 3px 6px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 </style>
