@@ -308,7 +308,6 @@ h1 {
 .color-buttons {
   display: flex;
   gap: 10px;
-  //margin-bottom: 10px;
   justify-content: center;
 }
 
