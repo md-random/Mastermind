@@ -1,7 +1,7 @@
 <template>
   <div class="mastermind-container">
     <div class="game-board">
-      <div class="version-align">version 1.3</div>
+      <div class="version-align">version 1.4</div>
 
       <h1>Mastermind</h1>
       <button @click="startNewGame">New Game</button>
@@ -19,23 +19,27 @@
             </div>
           </div>
           <div class="feedback-pegs">
-            <div v-for="peg in 4" :key="peg" class="feedback-peg-hole">
-              <span
-                v-if="
-                  getFeedback(guesses[row - 1]) &&
-                  peg <= getFeedback(guesses[row - 1]).correct
-                "
-                class="feedback-peg correct"
-              ></span>
-              <span
-                v-else-if="
-                  getFeedback(guesses[row - 1]) &&
-                  peg <=
-                    getFeedback(guesses[row - 1]).correct +
-                      getFeedback(guesses[row - 1]).misplaced
-                "
-                class="feedback-peg misplaced"
-              ></span>
+            <div class="feedback-grid">
+              <div v-for="peg in 4" :key="peg" class="feedback-peg-hole">
+                <span
+                  v-if="
+                    guesses[row - 1] &&
+                    getFeedback(guesses[row - 1]) &&
+                    peg <= getFeedback(guesses[row - 1]).correct
+                  "
+                  class="feedback-peg correct"
+                ></span>
+                <span
+                  v-else-if="
+                    guesses[row - 1] &&
+                    getFeedback(guesses[row - 1]) &&
+                    peg <=
+                      getFeedback(guesses[row - 1]).correct +
+                        getFeedback(guesses[row - 1]).misplaced
+                  "
+                  class="feedback-peg misplaced"
+                ></span>
+              </div>
             </div>
           </div>
         </div>
@@ -167,14 +171,18 @@ startNewGame()
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
+  width: 100%;
 }
 
 .game-board {
   width: 40%;
+  min-width: 300px;
+  max-width: 500px;
   background-color: #f0f0f0;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
 .version-align {
@@ -182,9 +190,8 @@ startNewGame()
   top: 10px;
   right: 10px;
   font-size: 14px;
-  color: #fff;
+  color: #4169e1;
   font-weight: bold;
-  padding: 20px;
 }
 
 .board-rows {
@@ -192,23 +199,21 @@ startNewGame()
   flex-direction: column-reverse;
   gap: 10px;
   margin-bottom: 20px;
-  align-items: center;
 }
 
 .board-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.guess-pegs,
-.feedback-pegs {
+.guess-pegs {
   display: flex;
   gap: 5px;
 }
 
-.peg-hole,
-.feedback-peg-hole {
+.peg-hole {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -223,12 +228,37 @@ startNewGame()
   height: 26px;
   border-radius: 50%;
   border: 2px solid #000;
-  display: inline-block;
+}
+
+.feedback-pegs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  padding: 5px;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.feedback-peg-hole {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .feedback-peg {
-  width: 15px;
-  height: 15px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
 }
 
@@ -249,16 +279,55 @@ startNewGame()
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  justify-content: center;
+}
+
+.color-buttons button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+  padding: 10px;
 }
 
 .current-guess {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
   align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.current-guess .color-peg {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  margin-right: 5px;
+}
+
+.secret-code {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.secret-pegs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.secret-peg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #000;
 }
 
 button {
   margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 </style>
