@@ -1,12 +1,44 @@
 <template>
   <div class="mastermind-container">
-    <div class="game-board">
-      <div class="version-align">version 1.4</div>
-
+    <div class="controls">
+      <div class="version-align">version 1.5</div>
       <h1>Mastermind</h1>
       <button @click="startNewGame">New Game</button>
       <p>Guesses: {{ guessCount }} / 8</p>
-
+      <div class="color-buttons">
+        <button
+          v-for="color in colors"
+          :key="color"
+          :style="{ backgroundColor: color }"
+          @click="addColor(color)"
+          class="color-peg"
+        ></button>
+      </div>
+      <div class="current-guess">
+        Current guess:
+        <span
+          v-for="(color, index) in currentGuess"
+          :key="index"
+          :style="{ backgroundColor: color }"
+          class="color-peg"
+        ></span>
+      </div>
+      <button @click="removeLastColor">Remove Last</button>
+      <button @click="submitGuess">Submit Guess</button>
+      <div v-if="gameOver" class="secret-code">
+        <h2>Game Over!</h2>
+        <p>The secret code was:</p>
+        <div class="secret-pegs">
+          <span
+            v-for="(color, index) in secretCode"
+            :key="index"
+            :style="{ backgroundColor: color }"
+            class="color-peg secret-peg"
+          ></span>
+        </div>
+      </div>
+    </div>
+    <div class="play-area">
       <div class="board-rows">
         <div v-for="row in 8" :key="row" class="board-row">
           <div class="guess-pegs">
@@ -42,42 +74,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div v-if="!gameOver" class="controls">
-        <div class="color-buttons">
-          <button
-            v-for="color in colors"
-            :key="color"
-            :style="{ backgroundColor: color }"
-            @click="addColor(color)"
-            class="color-peg"
-          ></button>
-        </div>
-        <div class="current-guess">
-          Current guess:
-          <span
-            v-for="(color, index) in currentGuess"
-            :key="index"
-            :style="{ backgroundColor: color }"
-            class="color-peg"
-          ></span>
-        </div>
-        <button @click="removeLastColor">Remove Last</button>
-        <button @click="submitGuess">Submit Guess</button>
-      </div>
-
-      <div v-if="gameOver" class="secret-code">
-        <h2>Game Over!</h2>
-        <p>The secret code was:</p>
-        <div class="secret-pegs">
-          <span
-            v-for="(color, index) in secretCode"
-            :key="index"
-            :style="{ backgroundColor: color }"
-            class="color-peg secret-peg"
-          ></span>
         </div>
       </div>
     </div>
@@ -161,28 +157,41 @@ const getFeedback = (
   return { correct, misplaced }
 }
 
-// Initialize the game
 startNewGame()
 </script>
+
 <style scoped>
 .mastermind-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
   width: 100%;
+  position: relative;
+}
+
+.controls {
+  width: 40%;
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  transform: translateY(-25%);
+}
+
+.play-area {
+  width: 25%;
+  position: absolute;
+  left: 62.5%;
+  transform: translateX(-50%);
 }
 
 .game-board {
-  width: 40%;
-  min-width: 300px;
-  max-width: 500px;
+  width: 100%;
   background-color: #f0f0f0;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
 }
 
 .version-align {
@@ -199,6 +208,13 @@ startNewGame()
   flex-direction: column-reverse;
   gap: 10px;
   margin-bottom: 20px;
+  background-color: #8b4513;
+  border: 15px solid #a0522d;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    inset 0 0 50px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  transform: perspective(1000px) rotateX(5deg);
 }
 
 .board-row {
@@ -206,6 +222,11 @@ startNewGame()
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  background-color: #d2691e;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 3px rgba(255, 255, 255, 0.2);
 }
 
 .guess-pegs {
@@ -217,10 +238,11 @@ startNewGame()
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ddd;
+  background-color: #4b3621;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .color-peg {
@@ -228,6 +250,7 @@ startNewGame()
   height: 26px;
   border-radius: 50%;
   border: 2px solid #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .feedback-pegs {
@@ -269,10 +292,6 @@ startNewGame()
 .feedback-peg.misplaced {
   background-color: white;
   border: 1px solid #000;
-}
-
-.controls {
-  margin-top: 20px;
 }
 
 .color-buttons {
