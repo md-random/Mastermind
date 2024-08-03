@@ -21,7 +21,11 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(88, 143, 143);
+
+  background-color: rgba(58, 114, 114, 0.491);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
 }
 </style>

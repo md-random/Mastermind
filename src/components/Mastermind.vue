@@ -2,8 +2,7 @@
   <div class="mastermind-container">
     <div class="controls">
       <div class="title-align">
-        <h1>Mastermind <span class="version-align">version 1.6</span></h1>
-        <p>Guesses: {{ guessCount }} / 8</p>
+        <h1>Mastermind <span class="version-align">version 2.0</span></h1>
       </div>
 
       <div class="color-buttons">
@@ -205,7 +204,6 @@ h1 {
 
 .game-board {
   width: 100%;
-  background-color: #f0f0f0;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -216,13 +214,12 @@ h1 {
   flex-direction: column-reverse;
   gap: 10px;
   margin-bottom: 20px;
-  background-color: #8b4513;
-  border: 15px solid #a0522d;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
     inset 0 0 50px rgba(0, 0, 0, 0.5);
   padding: 20px;
   transform: perspective(1000px) rotateX(5deg);
+  background-color: rgb(88, 143, 143);
 }
 
 .board-row {
@@ -230,7 +227,7 @@ h1 {
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-  background-color: #d2691e;
+  background-color: transparent;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
@@ -246,7 +243,7 @@ h1 {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #4b3621;
+  background-color: #140f0989;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -273,7 +270,7 @@ h1 {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 5px;
   padding: 5px;
-  background-color: #ccc;
+  background-color: #cccccc49;
   border-radius: 5px;
 }
 
@@ -281,7 +278,7 @@ h1 {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #ddd;
+  background-color: #1f0c0c33;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -397,10 +394,6 @@ button {
     transform: none;
     order: 1;
     margin: 0 auto;
-  }
-
-  .title-align p {
-    margin: 0 0 20 0 !important;
   }
 
   h1 {
