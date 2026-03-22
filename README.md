@@ -32,7 +32,7 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 - **2.2**: Implemented dynamic UI changes based on game state
 - **2.3**: Refined game over state display and improved overall user experience
 - **2.4**: Added a Start Page with game instructions and optimized mobile responsiveness for smaller viewports
-- **2.5**: Integrated a cinematic video intro screen (`IntroPage.vue`) with an auto-fading MP3 audio track, volume controls, and a unified Cherry Blossom UI theme spanning the entire application.
+- **2.5**: Integrated a cinematic video intro screen (`IntroPage.vue`), overhauled the core UI with a seamless Cherry Blossom aesthetic, and incorporated Native to `Mastermind.vue` a dynamic 3-track ambient audio playlist featuring automated crossfading alongside dedicated in-game volume/mute controls.
 
 ## Logic and Function Explanations
 
