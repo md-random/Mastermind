@@ -4,25 +4,27 @@
     <audio ref="audioPlayer2" :src="audioSrc2" @timeupdate="onAudioTimeUpdate(2)" @ended="onAudioEnded(2)" class="bg-audio"></audio>
     
     <div class="controls">
-      <div class="audio-controls">
-        <button @click="toggleGameMute" class="icon-btn">
-          {{ isMuted ? '🔇' : '🔊' }}
-        </button>
-        <input 
-          v-if="!isMuted"
-          type="range" 
-          min="0" 
-          max="1" 
-          step="0.05" 
-          v-model.number="volume" 
-          @input="onVolumeChange"
-          class="volume-slider"
-        />
-      </div>
-      <div v-if="!gameOver">
-        <div class="title-align">
+      <div class="header-container">
+        <div class="audio-controls">
+          <button @click="toggleGameMute" class="icon-btn">
+            {{ isMuted ? '🔇' : '🔊' }}
+          </button>
+          <input 
+            v-if="!isMuted"
+            type="range" 
+            min="0" 
+            max="1" 
+            step="0.05" 
+            v-model.number="volume" 
+            @input="onVolumeChange"
+            class="volume-slider"
+          />
+        </div>
+        <div v-if="!gameOver" class="title-align">
           <h1>Mastermind <span class="version-align">version 2.5</span></h1>
         </div>
+      </div>
+      <div v-if="!gameOver">
         <div class="color-buttons">
           <button
             v-for="color in colors"
@@ -334,8 +336,8 @@ startNewGame()
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: url('../assets/CherryBlossomMastermind.png') center/cover no-repeat;
-  filter: blur(12px) brightness(0.4); /* Strong blur and heavy darkening strictly for game board legibility */
-  transform: scale(1.1); /* Hides blurred transparent edges */
+  filter: blur(12px) brightness(0.4);
+  transform: scale(1.1);
   z-index: -1;
   pointer-events: none;
 }
@@ -348,26 +350,38 @@ startNewGame()
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-.audio-controls {
+.header-container {
   display: flex;
+  flex-direction: column; /* Center precisely above the title */
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
   justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.audio-controls {
+  position: relative; /* Fixed anchor for the drop-down slider */
+  width: 32px;
+  height: 32px;
+  margin-bottom: 90px; /* Pushes it 20px higher above the Mastermind title */
+  z-index: 100;
 }
 
 .icon-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.4) !important;
   box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 0.96rem;
   transition: all 0.2s;
   cursor: pointer;
 }
@@ -378,30 +392,41 @@ startNewGame()
 }
 
 .volume-slider {
-  width: 100px;
+  position: absolute;
+  top: 82px; /* Positions perfectly below the icon */
+  left: 16px; /* Perfectly aligned to the horizontal center of the 32px icon */
+  width: 16px; 
+  height: 100px; /* The vertical track length bounds */
+  transform: translate(-50%, -50%) rotate(180deg); /* Reversed direction: bottom is louder */
+  -webkit-appearance: slider-vertical; /* Flawless native vertical finger swiping */
+  touch-action: none; /* Stops screen from sliding */
   cursor: pointer;
-  accent-color: #3498db;
+  margin: 0;
 }
 
 .version-align {
   display: flex;
   align-items: center;
   font-size: small;
-  color: #ffb7c5; /* Soft aesthetic blossom pink */
+  color: #ffb7c5;
   padding-left: 20px;
 }
 
 h1 {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 3em;
   color: #fff;
+  margin: 0;
 }
 
 .play-area {
   width: 35%;
   max-width: 400px;
   min-width: 300px;
+  display: flex;
+  justify-content: center;
 }
 
 .game-board {
@@ -414,13 +439,13 @@ h1 {
 .board-rows {
   display: flex;
   flex-direction: column-reverse;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
     inset 0 0 50px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  transform: perspective(1000px) rotateX(5deg);
+  padding: 30px 46px;
+  width: max-content;
   background-color: #5296a5;
 }
 
@@ -428,10 +453,9 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
   background-color: transparent;
   border-radius: 5px;
-  padding: 10px;
+  padding: 18px 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 3px rgba(255, 255, 255, 0.2);
 }
@@ -526,6 +550,7 @@ h1 {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
+  min-height: 40px; /* Pre-reserves the space for the pegs so it never jumps */
   color: #fff;
   font-weight: bold;
   letter-spacing: 1px;
@@ -612,6 +637,20 @@ button:disabled {
     height: inherit;
   }
 
+  .header-container {
+    flex-direction: row; /* Enforce side-by-side horizontally even on small screens */
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .audio-controls {
+    position: fixed;
+    left: 15px;
+    top: 25%; /* Moved up to roughly 25% of the screen height */
+    margin-top: -16px; /* Locks vertical alignment down exactly so adding the slider height doesn't force it to jump */
+  }
+  
   .play-area {
     width: 300px;
     position: static;
