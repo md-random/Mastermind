@@ -18,7 +18,7 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 
 ## Mastermind Project Version History
 
-### Version 1.0 - 2.4
+### Version 1.0 - 2.5
 
 - **1.0**: Initial release with basic Mastermind gameplay
 - **1.1**: Added feedback mechanism for correct and misplaced pegs
@@ -53,22 +53,7 @@ This is a Vue 3 component that implements the classic code-breaking game Masterm
 
 - `gameOver`: Determines if the game is over based on the number of guesses or a correct guess.
 
-## How to Use
 
-### Customization
-
-You can customize the game by modifying the following:
-
-- Number of attempts (default: 8)
-- Colors used in the game
-- Code length (default: 4)
-
-## Future Improvements
-
-- Add difficulty levels (e.g., more colors, longer codes)
-- Implement a scoring system
-- Add a timer for competitive play
-- Create a two-player mode
 
 ## License
 
